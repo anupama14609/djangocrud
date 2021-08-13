@@ -10,8 +10,7 @@
             {% if records %}
               <h5 class="card-title">CUSTOMER RECORDS </h5>
               <table class="table text-white">
-                <thead>
-                
+                <thead>              
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Username</th>
@@ -20,8 +19,7 @@
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
-                <tbody>
-                   
+                <tbody>                  
                         {% for record in records %}
                         <tr>
                             <th scope="row">{{forloop.counter}}</th>

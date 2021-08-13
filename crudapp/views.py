@@ -69,6 +69,13 @@ def update_database(request):
      return HttpResponseRedirect('/')   
 
 def download_record(request):
+    records = User.objects.all().order_by('-timeStamp')
+    context = {
+        'records':records,
+    }
+    return render(request, 'crudapp/base.html', context)
+
+def download_pdf(request):
     template_path = 'crudapp/downloads/download.html'
     posts = User.objects.all()
     context = {'allPost':posts}

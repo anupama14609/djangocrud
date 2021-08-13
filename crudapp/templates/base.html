@@ -54,8 +54,35 @@
             </div>
         
             <div class="modal-body bg-dark text-white p-2 border border-dark ">
-            <div class="display-download my-3">
-              No data Available yet....................
+                <div class="card-body">
+                    {% if records %}
+                      <h5 class="card-title">CUSTOMER RECORDS </h5>
+                      <table class="table text-white">
+                        <thead>              
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Username</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Password</th>                            
+                          </tr>
+                        </thead>
+                        <tbody>                  
+                                {% for record in records %}
+                                   <tr>
+                                    <th scope="row">{{forloop.counter}}</th>
+                                    <td>{{record.name}}</td>
+                                    <td>{{record.email}}</td>
+                                    <td>{{record.password}}</td>      
+                                  </tr>
+                                {% endfor %}
+                                
+                                {% else %}                   
+                                <div class="alert alert-warning" role="alert">
+                                    <strong>No Records Available In No Records Available In Database <i class="fa fa-database" aria-hidden="true"></i></strong>
+                                </div>
+                                 {% endif %}        
+                        </tbody>
+                      </table>                     
             </div>                   
                 <div class="modal-footer">
                     <button type="button" class="btn btn-info btn-sm" data-dismiss="modal">Close</button>
