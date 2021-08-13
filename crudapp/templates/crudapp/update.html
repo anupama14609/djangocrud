@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %} Update Records {% endblock title%}
+
+{% block content %}
+<div class="row my-4">
+    <div class="col">
+        <div class="card">
+            <form action="" method='POST' autocomplete="false" name="hidden" class="p-4">
+                {% csrf_token %}
+                {{form}}         
+                <div class="modal-footer my-3">
+                <button type="submit" class="btn btn-primary">Update Records</button>
+              
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content%}

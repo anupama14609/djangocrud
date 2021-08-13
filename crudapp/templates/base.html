@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+{% load static %}
+{% load crispy_forms_tags %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD Operations</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'crudapp/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'crudapp/css/style.css' %}">
+</head>
+<body>
+ <div class="container">
+     <div class="header col-lg-12 p-3 bg-dark text-white">
+        <h2 class="text-center">ModalForm CRUD Operations</h2>
+        <h6 class="text-center">Function Based View </h6>
+     </div>
+     <hr class="text-white mb-0">
+ 
+
+<!-- Add Records Modal -->
+<div class="modal fade" id="addRecordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add Records</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form action="" method='POST' autocomplete="false" name="hidden">
+                {% csrf_token %}
+                {{form}}         
+                <div class="modal-footer my-3">
+                <button type="submit" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>              
+                </div>
+            </form>
+            </div>        
+        </div>
+    </div>
+ </div>     
+          
+<!-- Download Record Modal -->
+<div class="modal fade" id="displayRecordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header blockquote alert alert-info alert-dismissible fade show" role="alert">
+                <strong>Download! Records History  </strong>               
+            </div>
+        
+            <div class="modal-body bg-dark text-white p-2 border border-dark ">
+            <div class="display-download ">
+               sow more data
+            </div>
+                    
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary btn-sm">Download</button>
+                </div>
+            </div>      
+        </div>
+    </div>
+
+
+</div>  
+
+<div class="bg-dark p-3 ">
+    <div class="col-lg-12 bg-dark">
+        <a href="{% url 'update-database' %}">
+<span> <i class="btn btn-info btn-sm rounded-circle p-3 mx-2 fa fa fa-spinner fa-spin"></i></span> 
+        </a>
+    
+   <a href="{% url 'home' %}"><button class="btn btn-info"> Home </button></a>  
+    <button class="btn btn-primary mx-1" data-toggle="modal" data-target="#addRecordModal">Add Records</button>
+    <button class="btn btn-info mx-1" data-toggle="modal" data-target="#displayRecordModal">Show Records</button>
+    </div>
+  
+</div>
+
+{% block content %}{% endblock content %}
+ 
+ </div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+</html>
