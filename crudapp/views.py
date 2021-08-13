@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponseRedirect
 from .forms import UserRecordsManagement
 from .models import User
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 # Create your views here.
 def add_show(request):
@@ -21,9 +21,12 @@ def add_show(request):
     form = UserRecordsManagement()
     records = User.objects.all().order_by('-timeStamp')
 
+
     context = {
         'form':form,
-        'records':records}
+        'records':records,
+        
+        }
         
     return render(request, 'crudapp/showadded.html',context)
 
