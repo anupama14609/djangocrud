@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponseRedirect
 from .forms import UserRecordsManagement
 from .models import User
+from django.core.paginator import Paginator
 
 # Create your views here.
 def add_show(request):
