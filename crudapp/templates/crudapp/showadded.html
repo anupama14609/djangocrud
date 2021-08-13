@@ -49,12 +49,10 @@
                     {% endif %}    
                      
                 </tbody>
-
-              </table>            
-            </div>
+              </table>                     
 <!--Pagination--> 
 <nav aria-label="Page navigation example">
-  <ul class="pagination ">
+  <ul class="pagination my-3 ">
   {% if records.has_previous %}
     <li class="page-item">
       <a class="page-link" href="?page={{records.previous_page_number}}">Prev</a>
@@ -69,6 +67,7 @@
   {% endif %}
   </ul>
 </nav>
+</div>
 <!-- end of pagination-->
           </div>
     </div>

@@ -1,6 +1,8 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect, HttpResponse
 from .forms import UserRecordsManagement
 from .models import User
+from django.template.loader import get_template
+from xhtml2pdf import pisa
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 # Create your views here.
@@ -20,7 +22,7 @@ def add_show(request):
 
     form = UserRecordsManagement()
     paginated_records = User.objects.all().order_by('-timeStamp')
-    records = Paginator(paginated_records.filter(publish=True),5)
+    records = Paginator(paginated_records.filter(publish=True),4)
     page= request.GET.get('page')
     try:
         records = records.page(page)   
@@ -37,14 +39,11 @@ def add_show(request):
         
     return render(request, 'crudapp/showadded.html',context)
 
-
 def delete_record(request,id):
     if request.method == 'POST':
         record_id = User.objects.get(pk=id)
         record_id.delete()
         return HttpResponseRedirect('/')
-
-
 
 def update_record(request,id):
     if request.method == 'POST':
@@ -63,10 +62,23 @@ def update_record(request,id):
     print(context)
     return render(request, 'crudapp/update.html', context)
 
-
-
 def update_database(request):
      queryset = User.objects.all()
      for record in queryset:
           record.save()
      return HttpResponseRedirect('/')   
+
+def download_record(request):
+    template_path = 'crudapp/downloads/download.html'
+    posts = User.objects.all()
+    context = {'allPost':posts}
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="ExportRecord.pdf"'
+    template = get_template(template_path)
+    html = template.render(context)
+    pisa_status = pisa.CreatePDF(
+       html, dest=response)
+  
+    if pisa_status.err:
+       return HttpResponse('We had some errors <pre>' + html + '</pre>')
+    return response
