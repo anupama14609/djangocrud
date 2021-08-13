@@ -19,8 +19,15 @@ def add_show(request):
             error = "something went wrong"
 
     form = UserRecordsManagement()
-    records = User.objects.all().order_by('-timeStamp')
-
+    paginated_records = User.objects.all().order_by('-timeStamp')
+    records = Paginator(paginated_records.filter(publish=True),5)
+    page= request.GET.get('page')
+    try:
+        records = records.page(page)   
+    except PageNotAnInteger:
+        records  = records.page(1)
+    except EmptyPage:
+        records  = records.page(records.num_pages)
 
     context = {
         'form':form,
